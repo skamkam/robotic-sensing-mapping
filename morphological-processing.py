@@ -24,9 +24,6 @@ import cv2 as cv
 import numpy as np
 
 def displayImage(file):
-    pass
-
-def displayImage2(file):
     cv.imshow("Display", file)
     cv.waitKey(0)      # waits for keypress to close window
 
@@ -54,7 +51,7 @@ opening = cv.morphologyEx(img, cv.MORPH_OPEN, kernel)
 displayImage(opening)
 #   opening by explicitly eroding then dilating
 opening2 = cv.dilate(erosion, kernel, iterations=1)
-displayImage(opening2)
+#displayImage(opening2)
 
 # Closing
 #   closing by calling morphologyEx and MORPH_CLOSE
@@ -62,7 +59,7 @@ closing = cv.morphologyEx(img, cv.MORPH_CLOSE, kernel)
 displayImage(closing)
 #   closing by explicitly dilating then eroding
 closing2 = cv.erode(dilation, kernel, iterations=1)
-displayImage(closing2)
+#displayImage(closing2)
 
 # Morphological Gradient
 #   gradient by calling morphologyEx and MORPH_GRADIENT
@@ -70,18 +67,19 @@ gradient = cv.morphologyEx(img, cv.MORPH_GRADIENT, kernel)
 displayImage(gradient)
 #   gradient by subtracting the erosion of the image from the dilation
 gradient2 = cv.subtract(dilation, erosion)
-displayImage(gradient2)
+#displayImage(gradient2)
 
 # Top Hat Transformation
 tophat = cv.morphologyEx(img, cv.MORPH_TOPHAT, kernel)
 displayImage(tophat)
 #   by subtracting the opened image from original
 tophat2 = cv.subtract(img, opening)
-displayImage(tophat2)
+#displayImage(tophat2)
 
 # Black Hat Transformation
 blackhat = cv.morphologyEx(img, cv.MORPH_BLACKHAT, kernel)
-displayImage2(blackhat)
+displayImage(blackhat)
 #   by subtracting the closed image from original
+#   NOTE: this doesn't work right now - just returns a black image?
 blackhat2 = cv.subtract(img, closing)
-displayImage2(blackhat2)
+#displayImage(blackhat2)
